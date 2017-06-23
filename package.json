@@ -1,0 +1,26 @@
+{
+  "name": "raureif-sass",
+  "version": "0.1.0",
+  "description": "",
+  "main": "dist/index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "raureif-addon"
+  ],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "raureif": "^1.6.0"
+  },
+  "dependencies": {
+    "broccoli-funnel": "^1.2.0",
+    "broccoli-merge-trees": "^2.0.0",
+    "broccoli-sass-source-maps": "^2.0.0",
+    "glob": "^7.1.2"
+  }
+}
