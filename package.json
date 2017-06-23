@@ -1,19 +1,18 @@
 {
   "name": "raureif-sass",
   "version": "0.1.0",
-  "description": "",
+  "description": "Raureif Sass Addon",
   "main": "dist/index.js",
-  "directories": {
-    "test": "tests"
-  },
+  "files": [
+    "dist/*"
+  ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "raureif test"
   },
   "keywords": [
     "raureif-addon"
   ],
-  "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "raureif": "^1.6.0"
   },

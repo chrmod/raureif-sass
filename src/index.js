@@ -5,10 +5,10 @@ import compileSass from 'broccoli-sass-source-maps';
 import path from 'path';
 
 export default {
-  componentsPath: 'styles',
+  folder: 'styles',
 
   build(inputTree) {
-    const stylesTree = new Funnel(inputTree, { srcDir: this.componentsPath });
+    const stylesTree = new Funnel(inputTree, { srcDir: this.folder });
     // TODO: should not rely on _private properties
     /* eslint-disable */
     const workingDir = inputTree._directoryPath;
@@ -17,7 +17,7 @@ export default {
     const sassNodes = glob.sync('**/[^_]*.scss', {
       cwd: workingDir,
     }).map((filename) => {
-      const fileNameWithoutPrefix = filename.substr(this.componentsPath.length + path.sep.length);
+      const fileNameWithoutPrefix = filename.substr(this.folder.length + path.sep.length);
       const fileNameSplitByDot = fileNameWithoutPrefix.split('.');
       fileNameSplitByDot.pop(); // drop the .scss extension
       const filePathWithoutExtension = fileNameSplitByDot.join('.');
@@ -37,16 +37,16 @@ export default {
 
     const outputTree = new MergeTrees([
       ...sassNodes.map(n => n.tree),
+      new Funnel(stylesTree, {
+        exclude: ['**/*.scss'],
+      }),
     ], {
       overwrite: true,
     });
 
-    const exportedFiles = sassNodes.map(n => `${n.filePathWithoutExtension}.css`);
-    console.log(exportedFiles);
-
     return new Funnel(outputTree, {
-      destDir: this.componentsPath,
-      include: exportedFiles,
+      destDir: this.folder,
+      include: ['**/*.css'],
     });
   },
 };
