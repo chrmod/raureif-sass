@@ -2,6 +2,12 @@
   "name": "raureif-sass",
   "version": "0.1.0",
   "description": "Raureif Sass Addon",
+  "repository": "https://github.com/chrmod/raureif-sass",
+  "author": "Krzysztof Jan Modras <chrmod@chrmod.net>",
+  "license": "MIT",
+  "keywords": [
+    "raureif-addon"
+  ],
   "main": "dist/index.js",
   "files": [
     "dist/*"
@@ -9,10 +15,6 @@
   "scripts": {
     "test": "raureif test"
   },
-  "keywords": [
-    "raureif-addon"
-  ],
-  "license": "MIT",
   "devDependencies": {
     "raureif": "^1.6.0"
   },
