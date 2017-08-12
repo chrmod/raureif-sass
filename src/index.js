@@ -6,13 +6,11 @@ import path from 'path';
 
 export default {
   folder: 'styles',
+  exclude: ['**/*.scss'],
 
-  build(inputTree) {
+  build(inputTree, project) {
     const stylesTree = new Funnel(inputTree, { srcDir: this.folder });
-    // TODO: should not rely on _private properties
-    /* eslint-disable */
-    const workingDir = inputTree._directoryPath;
-    /* eslint-enable */
+    const workingDir = path.join(project.path, 'src');
 
     const sassNodes = glob.sync('**/[^_]*.scss', {
       cwd: workingDir,
@@ -36,17 +34,14 @@ export default {
     });
 
     const outputTree = new MergeTrees([
-      ...sassNodes.map(n => n.tree),
-      new Funnel(stylesTree, {
-        exclude: ['**/*.scss'],
-      }),
+      inputTree,
+      ...sassNodes.map(n => new Funnel(n.tree, { destDir: this.folder })),
     ], {
       overwrite: true,
     });
 
     return new Funnel(outputTree, {
-      destDir: this.folder,
-      include: ['**/*.css'],
+      exclude: this.exclude,
     });
   },
 };
